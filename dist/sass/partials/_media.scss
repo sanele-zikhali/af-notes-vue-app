@@ -1,0 +1,36 @@
+@media (max-width: 1350px) {
+  .notes-card {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+}
+@media (max-width: 1180px) {
+  .notes-card {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (min-width: 740px) {
+  body {
+    max-width: 80% !important;
+    margin: auto;
+  }
+}
+@media (max-width: 600px) {
+  .navbar {
+    width: 100% !important;
+  }
+  .notes-card {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 430px) {
+  .main-action {
+    flex-direction: column !important;
+    margin-bottom: 30px !important;
+    padding: 0 0 10px 0 !important;
+  }
+  .tooltip {
+    left: 0;
+    top: 100% !important;
+    display: inline-block !important;
+  }
+}

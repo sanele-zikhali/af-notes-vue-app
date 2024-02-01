@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link rel="stylesheet" href="dist/css/all.min.css" />
+    <link rel="stylesheet" href="dist/css/main.css" />
+  </head>
+  <body id="afnotes">
+    <div class="note-details-cover" id="note-details">
+      <div class="note-details">
+        <p class="note-details-title">
+          Note Details (ID: # <span id="noteID"></span> )
+        </p>
+        <div class="details-grid">
+          <div class="details-grid-cols">
+            <p><b>Title</b></p>
+            <p><b>Description</b></p>
+            <p><b>Date</b></p>
+          </div>
+          <div class="details-grid-cols">
+            <p id="noteTitle"></p>
+            <p id="noteDescription"></p>
+            <p id="noteDate"></p>
+            <p></p>
+          </div>
+        </div>
+        <div class="details-text">
+          <p id="noteText">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti,
+            earum! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Deleniti, earum!
+          </p>
+        </div>
+        <div class="details-action">
+          <button
+            @click="closeNoteDetails()"
+            type="button"
+            class="btn dark font-titillium"
+          >
+            Go Back
+            <div class="fa fa-chevron-left btn-icon"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="body-cover" id="bodyCover">
+      <form @submit.prevent="saveNote()" class="add-note-form">
+        <div class="form-header">
+          <button
+            id="btnCloseCover"
+            type="button"
+            class="btn danger btn-circular"
+          >
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+        <div>
+          <p v-show="validFields" class="alert alert-success">
+            <b>Saved</b> | Redirecting....
+          </p>
+          <ul v-show="fieldError" class="errors">
+            <li class="text-error" v-for="(error, index) in errors">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <label for="note-title">Note Title</label>
+          <input
+            @keydown="removeTitleError()"
+            type="text"
+            v-model="noteTitle"
+            placeholder="Midnight Prayer"
+            id="note-title"
+            :disabled="isDataSaved ? true : false"
+            class="form-input"
+            :class="titleError ? 'error': ''"
+            maxlength="25"
+          />
+        </div>
+        <div class="form-group">
+          <label for="small-description">Description</label>
+          <input
+            @keydown="removeDescriptionError()"
+            type="text"
+            v-model="noteDescription"
+            placeholder="This is about the prayer.."
+            id="small-description"
+            class="form-input"
+            :class="descriptionError ? 'error': ''"
+            maxlength="30"
+            :disabled="isDataSaved ? true : false"
+          />
+        </div>
+        <div class="form-group">
+          <label for="note-text">Note Text</label>
+          <textarea
+            @keydown="removeTextError()"
+            class="form-textarea"
+            :class="textError ? 'error': ''"
+            id="note-text"
+            v-model="noteText"
+            placeholder="Enter your note here (350 char(s))"
+            maxlength="350"
+            :disabled="isDataSaved ? true : false"
+          ></textarea>
+        </div>
+        <button type="submit" class="form-btn btn primary">
+          Add New Note <i class="fa fa-plus btn-icon"></i>
+        </button>
+      </form>
+    </div>
+    <div class="main-container">
+      <!-- Header -->
+      <header>
+        <a href="#" class="logo">
+          <i class="fab fa-autoprefixer logo-icon"></i>
+          <p>Af<span>Notes</span></p>
+        </a>
+        <div class="toggler-menu">
+          <div class="bar" id="bar1"></div>
+          <div class="bar" id="bar2"></div>
+          <div class="bar" id="bar3"></div>
+        </div>
+        <div class="navbar" id="navbar">
+          <h1 class="logo-nav">
+            <i class="fab fa-autoprefixer logo-icon"></i>
+          </h1>
+          <ul>
+            <li>
+              <a href="#">Help <i class="fa fa-question-circle"></i></a>
+            </li>
+            <li>
+              <a href="#">About <i class="fa fa-question"></i></a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <!--Header Ends-->
+      <!-- Forms -->
+      <section class="main-action">
+        <p class="font-titillium">Developed By <b>Sanele Gcina</b></p>
+        <button id="btnToggleForm" type="button" class="btn btn-circular dark">
+          <i class="fa fa-plus"></i>
+        </button>
+        <div class="tooltip">
+          <small>Click To Add New Note</small>
+        </div>
+      </section>
+      <!-- Forms Ends -->
+      <!-- Notes Cards -->
+      <div v-if="notes.length > 0" class="notes-card">
+        <div class="note-card" v-for="(note, index) in notes" :key="note.id">
+          <div class="note-card-header">
+            <small class="date-saved font-titillium"
+              >DATE : <b>{{ note.noteDate }}</b></small
+            >
+          </div>
+          <div class="note-card-title" @click="viewNoteDetails(note.id)">
+            <small class="tooltip" id="tooltip">View Note Details</small>
+            <p class="font-titillium"><b>{{ note.noteTitle }}</b></p>
+            <div>
+              <small class="note-card-subtitle font-titillium"
+                >{{ note.noteDescription }}</small
+              >
+            </div>
+          </div>
+          <div class="note-card-body">
+            <button type="button" class="btn btn-small dark">
+              <i class="far fa-edit"></i>
+            </button>
+            <button
+              @click="deteleNote(note.id)"
+              type="button"
+              class="btn btn-small danger"
+            >
+              <i class="far fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <p class="card-label">No Notes Available</p>
+      </div>
+
+      <!-- Notes Cards Ends -->
+      <!-- Note Details -->
+
+      <!-- Note Details Ends -->
+      <footer>
+        <p class="font-titillium">
+          All Right Reserved &copy; <b>Carl Technologies</b>
+        </p>
+      </footer>
+    </div>
+    <script src="dist/js/vue.global.js"></script>
+    <script src="dist/js/app.js"></script>
+    <script src="components/Home.js"></script>
+    <script src="dist/js/jquery-3.3.1.min.js"></script>
+    <script src="dist/js/all.min.js"></script>
+    <script src="dist/js/toastr.min.js"></script>
+
+    <script>
+      const bodyCover = $("#bodyCover");
+      const btnToggleForm = $("#btnToggleForm");
+      const btnCloseForm = $("#btnCloseCover");
+      const btnToggleNavLinks = $(".toggler-menu");
+      const navBarLinks = $("#navbar");
+
+      btnToggleForm.click(function () {
+        bodyCover.addClass("bodyCoverActive");
+        $("body").css("overflowY", "hidden");
+      });
+      btnCloseForm.click(function () {
+        bodyCover.removeClass("bodyCoverActive");
+        $("body").css("overflowY", "auto");
+      });
+      btnToggleNavLinks.click(function () {
+        navBarLinks.toggleClass("showNavLinks");
+        btnToggleNavLinks.toggleClass("close-menu");
+      });
+    </script>
+  </body>
+</html>

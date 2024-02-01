@@ -1,0 +1,58 @@
+.main-action {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0;
+  padding-bottom: 20px;
+}
+.notes-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+footer {
+  border-top: 1px solid #c9c9c9;
+  padding: 20px 0;
+  margin-top: 30px;
+}
+.note-details-cover {
+  display: none;
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  left: 0;
+  width: 100%;
+  z-index: 5000;
+  height: 100vh;
+  background: #000000d2;
+  justify-content: center;
+  align-items: center;
+  font-family: "Titillium" !important;
+
+  .note-details {
+    width: 500px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+
+    .note-details-title {
+      background: #1a1a1a;
+      border-radius: 4px;
+      padding: 4px 10px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+    }
+    .details-text {
+      width: 100%;
+      margin: 10px 0;
+      background: #ececec;
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #c2c2c2;
+    }
+  }
+}

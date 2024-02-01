@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "Titillium";
+  src: url(../../../assets/fonts/TitilliumRegular.ttf);
+}
+@font-face {
+  font-family: "Quicksand";
+  src: url(../../../assets/fonts/Quicksand-Regular.ttf);
+}
+@font-face {
+  font-family: "Quicksand-Bold";
+  src: url(../../../assets/fonts/Quicksand-Bold.ttf);
+}
+.font-titillium {
+  font-family: "Titillium" !important;
+}
+.font-quicksand {
+  font-family: "Qucksand";
+}
+
+a,
+button,
+input,
+body {
+  font-family: "Quicksand", "san-serif";
+}

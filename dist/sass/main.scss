@@ -1,0 +1,246 @@
+@import "partials/header";
+@import "partials/media";
+@import "partials/mixins";
+@import "partials/style";
+@import "partials/typography";
+@import "partials/variables";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.close-menu {
+  position: relative;
+  .bar {
+    position: absolute;
+    width: 20px !important;
+    background: #da3737 !important;
+
+    &:first-child {
+      transform: rotate(45deg);
+    }
+    &:last-child {
+      transform: rotate(135deg);
+    }
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+}
+body {
+  overflow-x: hidden;
+}
+.main-container {
+  padding: 40px;
+}
+button {
+  position: relative;
+}
+.btn {
+  outline: none;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.tooltip {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 4px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  padding: 2px 6px;
+}
+.btn-circular {
+  width: 35px;
+  height: 35px;
+  border-radius: 50% !important;
+  color: #fff;
+  padding: 0 !important;
+}
+.dark {
+  background: #1a1a1a;
+  color: #fff;
+}
+.btn-small {
+  font-size: 14px;
+  padding-inline: 8px !important;
+}
+
+.danger {
+  background: #da3737;
+  color: #fff;
+}
+.note-card {
+  background: #fff;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  padding: 20px;
+  transition: 0.3s;
+
+  .note-card-body {
+    button:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0px 2px 1px 0px #979797;
+  }
+  .note-card-divider {
+    width: 100%;
+    background: #f1f1f1;
+    height: 1px;
+    margin: 10px 0;
+  }
+
+  .note-card-title {
+    background: #f0f0f0;
+    border: 1px solid #dadada;
+    margin: 0px 0 10px 0;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    position: relative;
+
+    .tooltip {
+      background: #1a1a1a;
+    }
+    #tooltip {
+      top: -50%;
+      display: none !important;
+      font-family: "Titillium" !important;
+    }
+  }
+  .note-card-title:hover > #tooltip {
+    display: inline-block !important;
+  }
+}
+
+.body-cover {
+  position: absolute;
+  background: #000000d2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 8000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: 0.3s;
+  transform: translateY(-100%);
+
+  .add-note-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    font-family: "Titillium", "san-serif" !important;
+
+    .form-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    input,
+    textarea,
+    button {
+      font-family: "Titillium", "san-serif" !important;
+    }
+  }
+}
+
+.form-input {
+  padding: 6px 10px;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  transition: 0.3s;
+  min-width: 300px;
+
+  &:focus {
+    border-color: #cf42cf;
+  }
+  ::placeholder {
+    color: #e0e0e0 !important;
+  }
+}
+
+::placeholder {
+  font-family: "Titillium", "san-serif" !important;
+}
+.form-textarea {
+  padding: 6px 10px;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  transition: 0.3s;
+  min-width: 300px;
+  height: 90px;
+  resize: none !important;
+
+  &:focus {
+    border-color: #cf42cf;
+  }
+}
+.primary {
+  background: #cf42cf;
+  color: #fff;
+}
+.bodyCoverActive {
+  transform: translateY(0%) !important;
+}
+.alert {
+  margin: 6px 0 4px 0;
+  border-radius: 4px;
+  padding: 2px 6px;
+  background: #e4e4e4;
+  border: 1px solid #c9c9c9;
+}
+.alert-success {
+  background: #59e059 !important;
+  border-color: #4ac04a !important;
+  color: #267526 !important;
+}
+.alert-danger {
+  background: #e05353 !important;
+  border-color: #c74646 !important;
+  color: #752424 !important;
+}
+.error {
+  border: 1px solid #da3737 !important;
+}
+.success {
+  background: #59e059 !important;
+}
+.text-error {
+  color: #c74646 !important;
+}
+.errors {
+  margin: 0 0 8px 0 !important;
+  padding: 0 0 0 20px !important;
+  li {
+    font-size: 14px;
+  }
+}
+.card-label {
+  background: #f0f0f0;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: "Titillium" !important;
+  border: 1px solid #d6d6d6;
+}
